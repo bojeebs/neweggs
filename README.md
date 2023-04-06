@@ -37,11 +37,11 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 ![Screenshot of ERD](Assets/ERD.png)
 
 ## Component Hierarchy
-- [Tick-it Component Hierarchy](https://www.figma.com/file/jP6HhuGUxkJbOPSy7MdPPT/Tick-it?node-id=0-1&t=DLOIyTkYkJ26hn7d-0)
+- ![Screenshot of Components](Assest/Component.png)
 
 ## Low Fidelity Wireframes
 - [Low Fidelity Wireframes](https://www.figma.com/file/XCTGL7lXleDeyuwedf9lOt/Tick-It?node-id=0-1&t=RZa1HronwBGozD30-0)
 
 ## Links
 - [Backend Repo Link](https://github.com/bojeebs/neweggs)
-- [Project Trello Board](https://trello.com/b/czYkOXUP/tick-it)
+- [Project Trello Board](https://trello.com/b/pu1dS7Wk/neweggs)
