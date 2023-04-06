@@ -37,7 +37,7 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 ![Screenshot of ERD](Assets/ERD.png)
 
 ## Component Hierarchy
-- ![Screenshot of Components](Assest/Component.png)
+- ![Screenshot of Components](Assets/Component.png)
 
 ## Low Fidelity Wireframes
 - [Low Fidelity Wireframes](https://www.figma.com/file/XCTGL7lXleDeyuwedf9lOt/Tick-It?node-id=0-1&t=RZa1HronwBGozD30-0)
