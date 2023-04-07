@@ -31,6 +31,7 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 - Search bar for products
 - More categories of products to choose from including hamburger/dropdown menu
 - Implement Auth to allow users to create accounts and log in - in progress
+- Add carousel images to both home page and product pages
 
 ## ERD
 
@@ -40,7 +41,7 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 - ![Screenshot of Components](Assets/Component.png)
 
 ## Low Fidelity Wireframes
-- [Low Fidelity Wireframes](https://www.figma.com/file/XCTGL7lXleDeyuwedf9lOt/Tick-It?node-id=0-1&t=RZa1HronwBGozD30-0)
+- [Low Fidelity Wireframes](https://www.figma.com/file/FRpNeMbISdKnStmuQzawXY/Newegg-Wireframe?node-id=0%3A1&t=zrC21aDDZEOdVNUL-1)
 
 ## Links
 - [Backend Repo Link](https://github.com/bojeebs/neweggs)
