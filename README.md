@@ -15,6 +15,13 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 
 </details>
 
+## Technology Used
+- React front End with React Redux
+- Django backend with Auth
+- DBeaver for database managment
+- Render for backend deployment and Netlify 
+
+## Installitons
 
 ## Key Features
 1. View several different categories of products
@@ -44,5 +51,4 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 - [Low Fidelity Wireframes](https://www.figma.com/file/FRpNeMbISdKnStmuQzawXY/Newegg-Wireframe?node-id=0%3A1&t=zrC21aDDZEOdVNUL-1)
 
 ## Links
-- [Backend Repo Link](https://github.com/bojeebs/neweggs)
 - [Project Trello Board](https://trello.com/b/pu1dS7Wk/neweggs)
