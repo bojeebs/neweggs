@@ -35,5 +35,6 @@ class UserView(APIView):
             username = serializer.validated_data.get('username')
             password = serializer.validated_data.get('password')
             return Response({'message': f'Username: {username}, Password: {password}'})
+            
         else:
             return Response(serializer.errors, status=400)

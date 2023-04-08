@@ -9,6 +9,7 @@ function Logging () {
   const [password, setPassword] = useState('');
 
 const submit = async e => {
+  console.log("submitworks")
   e.preventDefault();
   const user = {
     username: username,
@@ -33,7 +34,7 @@ const submit = async e => {
 
 
 
-console.log("test line 34")
+
 
 
 
