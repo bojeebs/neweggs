@@ -6,18 +6,18 @@ export default function Header()
   
   const [isAuth, setIsAuth] = useState(false); 
   
-  // useEffect(() => { 
-  //   if (localStorage.getItem('access_token') !== null) 
-  //   { setIsAuth(true); } 
-  // }, 
-  //   []); 
+  useEffect(() => { 
+    if (localStorage.getItem('access_token') !== null) 
+    { setIsAuth(true); } 
+  }, 
+    [isAuth]); 
     
     return ( 
       <div> 
-        <Link to="/">Home</Link>
+        <Link to="/createaccount">CreateAccount</Link>
+        {isAuth ? <Link to="/">Home</Link> : null}
         <h1 className="header=text">Newegg</h1> 
-        <Link to="/login">Login</Link>
-        <Link to="/logout">Logout</Link>
+        {isAuth ? <Link to="/login">Login</Link> : <Link to="/logout">Logout</Link>}
       </div> 
     ); 
   }

@@ -16,7 +16,7 @@ const submit = async e => {
     password: password
   };
 
-  const {data} = await axios.post('https://newegg.onrender.com/api/user/',user,
+  const {data} = await axios.post('https://newegg.onrender.com/token/',user,
     {
       headers: {'Content-Type': 'application/json'},
       withCredentials: true
