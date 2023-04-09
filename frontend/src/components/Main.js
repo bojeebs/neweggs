@@ -9,23 +9,24 @@ function Main() {
 
 
   useEffect(() => {
-    if (localStorage.getItem("access_token") === null) {
-      window.location.href = "/login"
-  } else {
+    if (localStorage.getItem('access_token') === null) {
+      window.location.href = '/login';
+    } else {
       (async () => {
         try {
           const { data } = await axios.get('https://newegg.onrender.com/home/', {
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
             },
           });
           setMessage(data.message);
         } catch (e) {
-          console.log("not auth");
+          console.log('not auth');
         }
-      })()
+      })();
     }
-  }, [])
+  }, []);
   return (
     <div>
       <h3>Hi {message}</h3>

@@ -9,7 +9,7 @@ axios.interceptors.response.use(
       refresh = true;
       console.log(localStorage.getItem("refresh_token"));
       const response = await axios.post(
-        "http://localhost:8000/token/refresh/",
+        "https://newegg.onrender.com/token/refresh/",
         {
           refresh: localStorage.getItem("refresh_token"),
         },

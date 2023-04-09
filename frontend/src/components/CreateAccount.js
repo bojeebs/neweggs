@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom'
 
 function CreateAccount() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  let navigate = useNavigate()
   const handleSubmit = async (e) => {
     console.log("createaccount-btn")
     e.preventDefault();
@@ -20,7 +22,8 @@ function CreateAccount() {
           withCredentials: true
         }
       );
-      console.log(data)
+      console.log(data);
+      navigate('/login');
     } catch (e) {
       console.log(e);
     }

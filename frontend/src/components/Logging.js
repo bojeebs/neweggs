@@ -4,7 +4,7 @@ import {useState} from "react";
 
 
 
-function Logging () {
+function Logging ({ toggleAuthenticated }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,6 +29,7 @@ const submit = async e => {
   localStorage.setItem('access_token', data.access);
   localStorage.setItem('refresh_token', data.refresh);
   axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
+  toggleAuthenticated();
   window.location.href = '/';
 }
 
