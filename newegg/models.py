@@ -13,7 +13,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
     product_name = models.CharField(max_length = 100, default = 'no product name')
-    product_description = models.CharField(max_length = 100, default = 'no description')
+    product_description = models.CharField(max_length = 300, default = 'no description')
     product_price = models.DecimalField(max_digits = 8, decimal_places = 2, default = 0)
     image_url = models.TextField(default='default_image_url')
 
@@ -27,7 +27,7 @@ class ShoppingCart(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places= 2, default=0)
 
     def __str__(self):
-        return self.user
+        return f'Shopping cart for customer {self.customer} containing product {self.product}'
 
 
 class Category(models.Model):
