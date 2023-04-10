@@ -75,7 +75,7 @@ class CategoryList(View):
     
 class CartDetail(View):
     def get(self, request):
-        cart_items = ShoppingCart.objects.filter(customer=request.User)
+        cart_items = ShoppingCart.objects.filter(customer=request.user)
         total_price = sum(item.price for item in cart_items)
         context = {'cart_items': cart_items, 'total_price': total_price}
         return render(request, 'cart_detail.html', context)
