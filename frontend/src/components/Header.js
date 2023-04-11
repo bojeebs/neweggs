@@ -21,7 +21,12 @@ export default function Header({ isAuthenticated, toggleAuthenticated }) {
   return (
     <div>
       <Link to="/createaccount">CreateAccount</Link>
-      {isAuthenticated ? <Link to="/">Home</Link> : null}
+      {isAuthenticated ? (
+        <>
+        <Link to="/">Home</Link> 
+        <Link to="cart/">Cart</Link>
+        </>
+        ) : null}
       <h1 className="header=text">Newegg</h1>
       {isAuthenticated ? (
         <Link to="/logout" onClick={toggleAuthenticated}>

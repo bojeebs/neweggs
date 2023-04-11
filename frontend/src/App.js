@@ -6,7 +6,7 @@ import Main from './components/Main';
 import Logging from './components/Logging';
 import Loggedout from './components/Loggedout';
 import CreateAccount from './components/CreateAccount';
-
+import Cart from './components/Cart'
 
 
 function App() {
@@ -24,10 +24,11 @@ function App() {
       toggleAuthenticated={toggleAuthenticated}/>
 
        <Routes>
-          <Route path="/" element={<Main/>}/>
-          <Route path="/login" element={<Logging toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/logout" element={<Loggedout/>}/>
-          <Route path="/createaccount" element={<CreateAccount/>}/>
+          <Route path="/" element={<Main isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/login" element={<Logging isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/logout" element={<Loggedout isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/createaccount" element={<CreateAccount isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/cart" element={<Cart isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
         </Routes>
       
       </div>

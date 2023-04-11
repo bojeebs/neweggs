@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
-
-function Main() {
+function Main({ isAuthenticated, toggleAuthenticated }) {
   <h1>Main</h1>;
   const [message, setMessage] = useState("")
 
-
   useEffect(() => {
-    if (localStorage.getItem('access_token') === null) {
+    if (!isAuthenticated) {
       window.location.href = '/login';
     } else {
       (async () => {
@@ -26,7 +23,8 @@ function Main() {
         }
       })();
     }
-  }, []);
+  }, [isAuthenticated]);
+
   return (
     <div>
       <h3>Hi {message}</h3>
@@ -35,3 +33,4 @@ function Main() {
 }
 
 export default Main;
+

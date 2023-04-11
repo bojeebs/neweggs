@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.views.generic import View, DetailView
 from .models import Customer, Product, ShoppingCart, Category, ProductCategory, OrderDetails
 from rest_framework import generics
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -72,14 +73,16 @@ class CategoryList(View):
         categories = Category.objects.all()
         context = {'categories': categories}
         return render(request, 'category_list.html', context)
-    
+
+
+
 class CartDetail(View):
     def get(self, request):
-        customer_id = request.user.customerprofile.id
+        # customer_id = request.user.id
         cart_items = ShoppingCart.objects.filter(customer_id=customer_id)
         total_price = sum(item.price for item in cart_items)
         context = {'cart_items': cart_items, 'total_price': total_price}
-        return render(request, 'cart_detail.html', context)
+        # return render(request, 'cart_detail.html', context)
 
 class CartRemove(View):
     def post(self, item_id):

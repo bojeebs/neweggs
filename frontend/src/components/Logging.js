@@ -1,12 +1,25 @@
 import axios from "axios";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 
 
 
-function Logging ({ toggleAuthenticated }) {
+function Logging ({ isAuthenticated, toggleAuthenticated }) {
+  console.log("🚀 ~ file: Logging.js:8 ~ Logging ~ isAuthenticated:", isAuthenticated)
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+
+  useEffect(() => {
+    const access_token = localStorage.getItem('access_token');
+    if (access_token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+      toggleAuthenticated(true);
+    }
+      
+    
+  }, []);
+
 
 const submit = async e => {
   console.log("submitworks")
@@ -25,11 +38,13 @@ const submit = async e => {
    
   );
   console.log(data)
+  console.log("test")
   localStorage.clear();
   localStorage.setItem('access_token', data.access);
   localStorage.setItem('refresh_token', data.refresh);
   axios.defaults.headers.common['Authorization'] = `Bearer ${data['access']}`;
   toggleAuthenticated();
+  
   window.location.href = '/';
 }
 
