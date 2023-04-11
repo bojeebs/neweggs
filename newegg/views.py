@@ -76,16 +76,35 @@ class CategoryList(View):
         return render(request, 'category_list.html', context)
 
 
+
+
 class CartDetail(View):
     def get(self, request):
-        cart_items = ShoppingCart.objects.all()
-        total_price = sum(item.price for item in cart_items)
-        data = {'cart_items': list(cart_items.values()), 'total_price': total_price}
+        customer_id = request.GET.get('customer_id')
+        if customer_id:
+            try:
+                customer = Customer.objects.get(id=customer_id)
+                cart_items = ShoppingCart.objects.filter(customer=customer)
+                total_price = sum(item.price for item in cart_items)
+                data = {'cart_items': list(cart_items.values()), 'total_price': total_price}
+                return JsonResponse(data)
+            except Customer.DoesNotExist:
+                pass
+        
+        data = {'cart_items': [], 'total_price': 0}
         return JsonResponse(data)
+
+
+# class CartDetail(View):
+#     def get(self, request):
+#         cart_items = ShoppingCart.objects.all()
+#         total_price = sum(item.price for item in cart_items)
+#         data = {'cart_items': list(cart_items.values()), 'total_price': total_price}
+#         return JsonResponse(data)
     
 # class CartDetail(View):
 #     def get(self, request):
-#         # customer_id = request.user.id
+#         customer_id = request.user.id
 #         cart_items = ShoppingCart.objects.all()
 #         total_price = sum(item.price for item in cart_items)
 #         context = {'cart_items': cart_items, 'total_price': total_price}
