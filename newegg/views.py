@@ -79,8 +79,8 @@ class CategoryList(View):
 
 
 class CartDetail(View):
-    def get(self, request):
-        customer_id = request.GET.get('customer_id')
+    def get(self, request, *args, **kwargs):
+        customer_id = kwargs.get('customer_id')
         if customer_id:
             try:
                 customer = Customer.objects.get(id=customer_id)
