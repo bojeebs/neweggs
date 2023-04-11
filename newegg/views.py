@@ -79,10 +79,10 @@ class CategoryList(View):
 class CartDetail(View):
     def get(self, request):
         # customer_id = request.user.id
-        cart_items = ShoppingCart.objects.filter(customer_id=customer_id)
+        cart_items = ShoppingCart.objects.all()
         total_price = sum(item.price for item in cart_items)
         context = {'cart_items': cart_items, 'total_price': total_price}
-        # return render(request, 'cart_detail.html', context)
+        return render(request, 'cart_detail.html', context)
 
 class CartRemove(View):
     def post(self, item_id):
