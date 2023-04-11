@@ -78,8 +78,7 @@ class CategoryList(View):
 
 class CartDetail(View):
     def get(self, request):
-        # customer_id = request.user.customerprofile.id
-        cart_items = ShoppingCart.objects.all
+        cart_items = ShoppingCart.objects.all()
         total_price = sum(item.price for item in cart_items)
         data = {'cart_items': list(cart_items.values()), 'total_price': total_price}
         return JsonResponse(data)
