@@ -11,6 +11,7 @@ from django.views.generic import View, DetailView
 from .models import Customer, Product, ShoppingCart, Category, ProductCategory, OrderDetails
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 
@@ -75,14 +76,21 @@ class CategoryList(View):
         return render(request, 'category_list.html', context)
 
 
-
 class CartDetail(View):
     def get(self, request):
-        # customer_id = request.user.id
-        cart_items = ShoppingCart.objects.all()
+        customer_id = request.user.customerprofile.id
+        cart_items = ShoppingCart.objects.filter(customer_id=customer_id)
         total_price = sum(item.price for item in cart_items)
-        context = {'cart_items': cart_items, 'total_price': total_price}
-        return render(request, 'cart_detail.html', context)
+        data = {'cart_items': list(cart_items.values()), 'total_price': total_price}
+        return JsonResponse(data)
+    
+# class CartDetail(View):
+#     def get(self, request):
+#         # customer_id = request.user.id
+#         cart_items = ShoppingCart.objects.all()
+#         total_price = sum(item.price for item in cart_items)
+#         context = {'cart_items': cart_items, 'total_price': total_price}
+#         return render(request, 'cart_detail.html', context)
 
 class CartRemove(View):
     def post(self, item_id):
