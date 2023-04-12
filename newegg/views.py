@@ -127,17 +127,17 @@ class CartAdd(View):
         return redirect('cart_detail')
 
 
-class OrderDetailsView(DetailView):
-    model = OrderDetails
-    template_name = 'order_details.html'
+# class OrderDetailsView(DetailView):
+#     model = OrderDetails
+#     template_name = 'order_details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        order_details = self.object
-        context['shopping_cart'] = order_details.shopping_cart
-        context['customer'] = order_details.customer
-        context['order_total'] = order_details.order_total
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         order_details = self.object
+#         context['shopping_cart'] = order_details.shopping_cart
+#         context['customer'] = order_details.customer
+#         context['order_total'] = order_details.order_total
+#         return context
 
 
 class OrderCreate(View):
@@ -156,13 +156,13 @@ class OrderCreate(View):
     
 class OrderDetailsView(View):
     def get(self, request, customer_id):
-        customer = Customer.objects.get(id=customer_id)
-        cart = ShoppingCart.objects.filter(customer=customer)
+        
+        cart = ShoppingCart.objects.filter(customer_id=customer_id)
         product_ids = [item.product.id for item in cart]
         price_total = sum([item.price for item in cart])
-        context = {
+        data = {
             'product_ids': product_ids,
             'customer_id': customer_id,
             'price_total': price_total,
         }
-        return render(request, 'order_details.html', context=context)
+        return JsonResponse(data)
