@@ -12,6 +12,8 @@ from .models import Customer, Product, ShoppingCart, Category, ProductCategory, 
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.http import request
+
 
 
 
@@ -118,10 +120,12 @@ class CartRemove(View):
 
 
 class CartAdd(View):
-    def post(self, request, product_id):
+    def post(self, request, customer_id, product_id):
+        customer = Customer.objects.get(id=customer_id)
         product = Product.objects.get(id=product_id)
-        ShoppingCart.objects.create(customer=request.user, product=product, price=product.product_price)
+        ShoppingCart.objects.create(customer=customer, product=product, price=product.product_price)
         return redirect('cart_detail')
+
 
 class OrderDetailsView(DetailView):
     model = OrderDetails
