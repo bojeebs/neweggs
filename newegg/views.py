@@ -111,9 +111,13 @@ class CartDetail(View):
 #         return render(request, 'cart_detail.html', context)
 
 class CartRemove(View):
-    def delete(self, item_id):
-        ShoppingCart.objects.filter(id=item_id).delete()
-        return redirect('cart_detail')
+    def delete(self, request, product_id):
+        try:
+            shopping_cart_item = ShoppingCart.objects.get(product_id=product_id, customer=request.user.customerprofile)
+            shopping_cart_item.delete()
+            return JsonResponse({'success': True})
+        except ShoppingCart.DoesNotExist:
+            return JsonResponse({'success': False, 'message': 'Item not found in cart.'})
 
 
 class CartAdd(View):
