@@ -111,7 +111,7 @@ class CartDetail(View):
 #         return render(request, 'cart_detail.html', context)
 
 class CartRemove(View):
-    def post(self, item_id):
+    def delete(self, item_id):
         ShoppingCart.objects.filter(id=item_id).delete()
         return redirect('cart_detail')
 
