@@ -113,6 +113,11 @@ class CartDetail(View):
 #         context = {'cart_items': cart_items, 'total_price': total_price}
 #         return render(request, 'cart_detail.html', context)
 
+class ProductDetail(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    
 class CartRemove(View):
     def delete(self, request, product_id):
         ShoppingCart.objects.filter(id=product_id).delete()

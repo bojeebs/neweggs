@@ -24,10 +24,10 @@ function App() {
       toggleAuthenticated={toggleAuthenticated}/>
 
        <Routes>
-          <Route path="/" element={<Main isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/home" element={<Main isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/login" element={<Logging isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/logout" element={<Loggedout isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/createaccount" element={<CreateAccount isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/" element={<CreateAccount isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/cart" element={<Cart isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
         </Routes>
       

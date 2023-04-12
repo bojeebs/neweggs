@@ -19,28 +19,29 @@ export default function Header({ isAuthenticated, toggleAuthenticated }) {
   // }, []);
 
   return (
-    <div>
-      <Link to="/createaccount">CreateAccount</Link>
+<div className="header-container">
+  <div className="flex justify-end items-center">
+    <div className="ml-auto">
+      <Link to="/">Create Account</Link>
+    </div>
+    <div className="hidden md:block">
       {isAuthenticated ? (
         <>
-        <Link to="/">Home</Link> 
-        <Link to="cart/">Cart</Link>
+          <Link to="/">Home</Link> 
+          <Link to="cart/">Cart</Link>
+          <Link to="/logout" onClick={toggleAuthenticated}>Logout</Link>
         </>
-        ) : null}
-      <h1 className="header=text">Newegg</h1>
-      {isAuthenticated ? (
-        <Link to="/logout" onClick={toggleAuthenticated}>
-          Logout
-        </Link>
       ) : (
         <Link to="/login">Login</Link>
       )}
     </div>
-  );
-}
-      
+    <div className="md:hidden">
+      <button>Menu</button>
+    </div>
     
-    
-    
-    
-    
+  </div>
+  <Link to="/home"><img src="https://c1.neweggimages.com/WebResource/Themes/Nest/logos/Newegg_full_color_logo_RGB.SVG" class="w-100 h-20" /></Link>
+  
+</div>
+
+  )}
