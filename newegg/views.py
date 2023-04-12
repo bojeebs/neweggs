@@ -12,7 +12,7 @@ from .models import Customer, Product, ShoppingCart, Category, ProductCategory, 
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+
 
 
 
@@ -110,7 +110,7 @@ class CartDetail(View):
 #         total_price = sum(item.price for item in cart_items)
 #         context = {'cart_items': cart_items, 'total_price': total_price}
 #         return render(request, 'cart_detail.html', context)
-@csrf_exempt
+
 class CartRemove(View):
     def delete(self, request, product_id):
         ShoppingCart.objects.filter(id=product_id).delete()
