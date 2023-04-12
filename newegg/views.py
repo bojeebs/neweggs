@@ -120,7 +120,7 @@ class CartRemove(View):
 class CartAdd(View):
     def post(self, request, product_id):
         product = Product.objects.get(id=product_id)
-        ShoppingCart.objects.create(customer=request.user, product=product, price=product.price)
+        ShoppingCart.objects.create(customer=request.user, product=product, price=product.product_price)
         return redirect('cart_detail')
 
 class OrderDetailsView(DetailView):
