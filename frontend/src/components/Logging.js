@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useState, useEffect} from "react";
-
+import '../styles/logging.css'
 
 
 
@@ -47,10 +47,6 @@ const submit = async e => {
   
   window.location.href = '/';
 }
-
-
-
-
 
 
 
