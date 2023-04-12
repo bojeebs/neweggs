@@ -12,6 +12,7 @@ from .models import Customer, Product, ShoppingCart, Category, ProductCategory, 
 from rest_framework import generics
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 
