@@ -109,7 +109,7 @@ class CartDetail(View):
 #         total_price = sum(item.price for item in cart_items)
 #         context = {'cart_items': cart_items, 'total_price': total_price}
 #         return render(request, 'cart_detail.html', context)
-
+@csrf_exempt
 class CartRemove(View):
     def delete(self, request, product_id):
         ShoppingCart.objects.filter(id=product_id).delete()
