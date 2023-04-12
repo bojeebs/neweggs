@@ -153,3 +153,16 @@ class OrderCreate(View):
             )
         cart_items.delete()
         return redirect('order_success')
+    
+class OrderDetailsView(View):
+    def get(self, request, customer_id):
+        customer = Customer.objects.get(id=customer_id)
+        cart = ShoppingCart.objects.filter(customer=customer)
+        product_ids = [item.product.id for item in cart]
+        price_total = sum([item.price for item in cart])
+        context = {
+            'product_ids': product_ids,
+            'customer_id': customer_id,
+            'price_total': price_total,
+        }
+        return render(request, 'order_details.html', context=context)
