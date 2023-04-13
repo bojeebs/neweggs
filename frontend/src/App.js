@@ -7,11 +7,16 @@ import Logging from './components/Logging';
 import Loggedout from './components/Loggedout';
 import CreateAccount from './components/CreateAccount';
 import Cart from './components/Cart'
+import Products from './components/Products'
+import CartModal from './components/CartModal';
+
 
 
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+
 
   const toggleAuthenticated = () => {
     setIsAuthenticated(!isAuthenticated);
@@ -21,24 +26,24 @@ function App() {
     <div className="App">
       <Header
       isAuthenticated={isAuthenticated}
-      toggleAuthenticated={toggleAuthenticated}/>
-
+      toggleAuthenticated={toggleAuthenticated}
+      />
+      
        <Routes>
           <Route path="/home" element={<Main isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/login" element={<Logging isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/logout" element={<Loggedout isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/" element={<CreateAccount isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
           <Route path="/cart" element={<Cart isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/products" element={<Products isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          
         </Routes>
+        
+      
+       
       
       </div>
-   
-
-
-
-
-
-   
+  
   );
 }
 

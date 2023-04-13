@@ -19,6 +19,10 @@ const Cart = ({ isAuthenticated,toggleAuthenticated }) => {
 
   return (
     <div>
+
+
+
+      
       <h1>Cart</h1>
       <ul>
         {cartItems.map(item => (
