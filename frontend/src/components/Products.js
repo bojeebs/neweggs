@@ -2,9 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CartModal from './CartModal';
 
-
-
-
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
@@ -14,31 +11,31 @@ const Products = () => {
     setShow(false);
   };
 
+
   useEffect(() => {
     const getProducts = async () => {
       const response = await axios.get('https://newegg.onrender.com/product/');
       setProducts(response.data);
-      console.log(response.data)
+      console.log(response.data);
     };
     
     getProducts();
   }, []);
 
-  const updateCart = async (newCart) => {
-  try {
-    await axios.put('https://your-api.com/cart', { cart: newCart });
-    console.log('Cart updated successfully!');
-  } catch (error) {
-    console.error('Error updating cart:', error);
-  }
-};
+
+  const handleAddToCart = async (productId) => {
+    try {
+      await axios.post(`https://newegg.onrender.com/cart/add/${productId}/`);
+      setCart([...cart, productId]);
+      console.log(`Product ${productId} added to cart`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  };
 
 
-  const handleAddToCart = (productId) => {
-    const selectedProduct = products.find((product) => product.id === productId);
-    setCart([...cart, selectedProduct]);
-    console.log(`Product ${productId} added to cart`);
-  }
+
+  
 
   return (
     <div className="flex flex-wrap justify-center items-center">
@@ -59,6 +56,7 @@ const Products = () => {
       <CartModal show={show} handleCloseCartModal={handleCloseCartModal} cart={cart} />
     </div>
   );
-}
+};
 
 export default Products;
+

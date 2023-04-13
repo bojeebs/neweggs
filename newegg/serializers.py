@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Customer, Product, ShoppingCart, Category, ProductCategory, OrderDetails
-from django.contrib.auth.models import User
+
 
 class UserSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -13,14 +13,9 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
         read_only=True
     )
 
-    user_id = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        source='user'
-    )
-
     class Meta:
         model = Customer
-        fields = ('id', 'user_id', 'name', 'address', 'email', 'phone_number','customer')
+        fields = ('id', 'name', 'address', 'email', 'phone_number','customer')
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

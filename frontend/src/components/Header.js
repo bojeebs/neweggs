@@ -23,17 +23,17 @@ export default function Header({ isAuthenticated, toggleAuthenticated,  }) {
     <div className="header-container">
       <div className="flex justify-end items-center">
         <div className="ml-auto">
-          <Link to="/">Create Account</Link>
+          {/* <Link to="/">Create Account</Link> */}
         </div>
         <div className="hidden md:block">
-          {isAuthenticated ? (
+          {/* {isAuthenticated ? (
             <>
               <Link to="/">Home</Link> 
               <Link to="/logout" onClick={toggleAuthenticated}>Logout</Link>
             </>
           ) : (
             <Link to="/login">Login</Link>
-          )}
+          )} */}
         </div>
         <Link to="/products">Products</Link>
       </div>
