@@ -24,24 +24,19 @@ const Products = () => {
     getProducts();
   }, []);
 
- 
-  customerId = 1
-
-  const addToCart = async (customerId, productId) => {
-    try {
-      customerId = 1
-      await axios.post(`https://newegg.onrender.com/cart/add/${customerId}/${productId}/`);
-      console.log(`Product ${productId} added to cart for customer ${customerId}`);
-    } catch (error) {
-      console.error('Error adding product to cart:', error);
-    }
-  };
+  const updateCart = async (newCart) => {
+  try {
+    await axios.put('https://your-api.com/cart', { cart: newCart });
+    console.log('Cart updated successfully!');
+  } catch (error) {
+    console.error('Error updating cart:', error);
+  }
+};
 
 
-  const handleAddToCart = (customerId, productId) => {
+  const handleAddToCart = (productId) => {
     const selectedProduct = products.find((product) => product.id === productId);
     setCart([...cart, selectedProduct]);
-    addToCart([customerId, productId])
     console.log(`Product ${productId} added to cart`);
   }
 
@@ -52,7 +47,7 @@ const Products = () => {
           <div className="flex-1 max-w-15 overflow-hidden">
             <h3 className="text-lg font-medium break-words">{product.product_name}</h3>
             <h4 className="text-sm">Free Shipping</h4>
-            <button className="bg-orange-500 text-white py-2 px-4 rounded" onClick={() => handleAddToCart(customerId, product.id)}>
+            <button className="bg-orange-500 text-white py-2 px-4 rounded" onClick={() => handleAddToCart(product.id)}>
               Add to Cart
             </button>
           </div>
