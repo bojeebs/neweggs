@@ -6,18 +6,20 @@ from rest_framework import generics
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
 
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         password = request.POST.get('password')
-        customer = authenticate(request, name=name, password=password)
+        customer = get_object_or_404(Customer, name=name)
 
-        if customer is not None:
-            login(request, customer)
+        if customer.password == password:
+            request.session['customer_id'] = customer.id
             return HttpResponse('Login successful!')
-        
+        else:
+            return HttpResponse('Login failed.')
         
 
 class CreateCustomerView(generics.CreateAPIView):
