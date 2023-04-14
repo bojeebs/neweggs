@@ -17,6 +17,8 @@ def login_view(request):
         if customer is not None:
             login(request, customer)
             return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'failed'})
 
 class CreateCustomerView(generics.CreateAPIView):
     queryset = Customer.objects.all()
