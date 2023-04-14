@@ -5,7 +5,7 @@ from .models import Product, ShoppingCart, OrderDetails, Customer
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
-        fields = ['name', 'password']
+        fields = ['username', 'password']
   
     def create(self, validated_data):
         customer = Customer.objects.create(
