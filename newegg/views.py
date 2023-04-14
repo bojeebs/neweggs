@@ -4,9 +4,18 @@ from django.views.generic import View
 from .models import  Product, ShoppingCart, User
 from rest_framework import generics
 from django.http import JsonResponse
+from django.contrib.auth import authenticate, login
 
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
+        if user is not None:
+            login(request, user)
+            return JsonResponse({'status': 'success'})
 
 
 

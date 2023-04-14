@@ -9,6 +9,7 @@ urlpatterns = [
      path('user/<int:pk>/', views.UserList.as_view(), name='customer_list'),
      path('api/users/create/', CreateUserView.as_view(), name='create_user'),
      path('product/', views.ProductList.as_view(), name='products'),
+     path('api/users/login/', views.login_view, name='login'),
      # path('cart/<int:customer_id>/', views.CartDetail.as_view(), name='cart'),
      path('cart/remove/<int:product_id>/', views.CartRemove.as_view(), name='remove_cart'),
      path('cart/add/<int:product_id>/', views.CartAdd.as_view(), name='cart_add'),
