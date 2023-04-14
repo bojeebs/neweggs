@@ -9,7 +9,7 @@ class CustomerSerializer(serializers.ModelSerializer):
   
     def create(self, validated_data):
         customer = Customer.objects.create(
-            name=validated_data['username'],
+            name=validated_data['name'],
             password=validated_data['password'])
         
         customer.save()
