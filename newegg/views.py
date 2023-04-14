@@ -6,6 +6,8 @@ from rest_framework import generics
 from django.http import JsonResponse
 
 
+from django.views.decorators.csrf import csrf_exempt
+
 
 
 
@@ -55,16 +57,21 @@ class CartRemove(View):
 
 
 class CartAdd(View):
+    authentication_classes = []
+    permission_classes = []
     def post(self, request, product_id):
         try:
             product = Product.objects.get(id=product_id)
             ShoppingCart.objects.create(product=product, price=product.product_price)
             return JsonResponse({'status': 'success'})
-        except (Product.DoesNotExist):
-            pass
-        return JsonResponse({'status': 'error'})
+        except Product.DoesNotExist:
+            return JsonResponse({'status': 'error'})
 
-    
+
+# bypassing csrf token
+cart_add = csrf_exempt(CartAdd.as_view())
+# time_tracker_detail = csrf_exempt(TimeTrackerDetail.as_view())
+
 class OrderDetailsView(View):
     def get(self, request, customer_id):
         
