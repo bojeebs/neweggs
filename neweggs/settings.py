@@ -24,7 +24,10 @@ CORS_ALLOWED_ORIGINS = [
     
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://newegg.onrender.com/api/customer/login/",
+    "https://newegg.onrender.com/api/customer/create/",
+
 ]
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True

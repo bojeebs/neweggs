@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import CreateCustomerView
+from .views import CreateCustomerView, login_view
 
 
 

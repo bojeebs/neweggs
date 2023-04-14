@@ -1,30 +1,39 @@
 from django.shortcuts import render, redirect
 from .serializers import ProductSerializer, CustomerSerializer
-from django.views.generic import View
+from django.views.generic import View, APIView
 from .models import  Product, ShoppingCart, Customer
 from rest_framework import generics
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 
-@csrf_exempt
-def login_view(request):
-    if request.method == 'POST':
+
+
+class LoginView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def post(self, request, format=None):
         name = request.POST.get('name')
         password = request.POST.get('password')
         customer = get_object_or_404(Customer, name=name)
 
         if customer.password == password:
             request.session['customer_id'] = customer.id
-            return HttpResponse('Login successful!')
+            return Response({'status': 'success'})
         else:
-            return HttpResponse('Login failed.')
+            return Response({'status': 'failure'})
         
 
 class CreateCustomerView(generics.CreateAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+
+
+login_view = csrf_exempt(login_view.as_view())
+# time_tracker_detail = csrf_exempt(TimeTrackerDetail.as_view())
 
 
 class ProductList(generics.ListCreateAPIView):
