@@ -17,7 +17,7 @@ class LoginView(APIView):
     permission_classes = []
 
     def post(self, request, format=None):
-        name = request.POST.get('name')
+        name = request.data.get('name')
         password = request.POST.get('password')
         customer = get_object_or_404(Customer, name=name)
 
