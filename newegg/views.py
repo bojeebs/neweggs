@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .serializers import UserSerializer, ProductSerializer
+from .serializers import ProductSerializer, CustomerSerializer
 from django.views.generic import View
-from .models import  Product, ShoppingCart, User
+from .models import  Product, ShoppingCart, Customer
 from rest_framework import generics
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
@@ -12,26 +12,21 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
+        customer = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
+        if customer is not None:
+            login(request, customer)
             return JsonResponse({'status': 'success'})
 
-
+class CreateCustomerView(generics.CreateAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
 
 
 class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-class UserList(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class CreateUserView(generics.CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 class ProductDetail(generics.RetrieveAPIView):
     queryset = Product.objects.all()

@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from .models import Product, ShoppingCart, OrderDetails, User
+from .models import Product, ShoppingCart, OrderDetails, Customer
 
 
-class UserSerializer(serializers.ModelSerializer):
+class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Customer
         fields = ['name', 'password']
   
     def create(self, validated_data):
-        user = User.objects.create(
-            name=validated_data['name'],
+        customer = Customer.objects.create(
+            username=validated_data['username'],
             password=validated_data['password'])
         
-        user.save()
-        return user
+        customer.save()
+        return customer
 
 
 
@@ -29,9 +29,9 @@ class ShoppingCartSerializer(serializers.HyperlinkedModelSerializer):
         queryset=Product.objects.all(),
         source='product'
     )
-    user_id = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
-        source='user'
+    customer_id = serializers.PrimaryKeyRelatedField(
+        queryset=Customer.objects.all(),
+        source='customer'
     )
     
     class Meta:
@@ -45,8 +45,8 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
         queryset=Product.objects.all(),
         source='product'
     )
-     user_id = serializers.PrimaryKeyRelatedField(
-        queryset=User.objects.all(),
+     customer_id = serializers.PrimaryKeyRelatedField(
+        queryset=Customer.objects.all(),
         source='customer'
     )
      shopping_cart_id = serializers.PrimaryKeyRelatedField(
@@ -55,4 +55,4 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
      )
      class Meta:
         model = OrderDetails
-        fields = ['product', 'product_id', 'user', 'user_id' 'shopping_cart_id', 'order_total']
+        fields = ['product', 'product_id', 'customer', 'customer_id,' 'shopping_cart_id', 'order_total']
