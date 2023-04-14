@@ -3,7 +3,7 @@ from django.db import models
 
 class Customer(models.Model):
    
-    username = models.CharField(max_length=100, default='no name')
+    name = models.CharField(max_length=100, default='no name')
     password = models.CharField(max_length=100, default='no name')
     
 
