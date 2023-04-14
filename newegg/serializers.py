@@ -2,15 +2,14 @@ from rest_framework import serializers
 from .models import Product, ShoppingCart, OrderDetails, User
 
 
-class UserSerializer(serializers.Serializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['name, password']
+        fields = ['name', 'password']
   
     def create(self, validated_data):
         user = User.objects.create(
             name=validated_data['name'],
-            email=validated_data['email']
         )
         user.set_password(validated_data['password'])
         user.save()
