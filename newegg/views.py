@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from .serializers import CustomerSerializer, ProductSerializer
+from .serializers import UserSerializer, ProductSerializer
 from django.views.generic import View
-from .models import Customer, Product, ShoppingCart, Category
+from .models import  Product, ShoppingCart, User
 from rest_framework import generics
 from django.http import JsonResponse
 
 
-from django.views.decorators.csrf import csrf_exempt
+
 
 
 
@@ -15,35 +15,13 @@ class ProductList(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-class CustomerList(generics.RetrieveAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+class UserList(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-class CategoryList(View):
-    def get(self, request):
-        categories = Category.objects.all()
-        context = {'categories': categories}
-        return render(request, 'category_list.html', context)
-
-
-
-
-# class CartDetail(View):
-#     def get(self, request, *args, **kwargs):
-#         customer_id = kwargs.get('customer_id')
-#         if customer_id:
-#             try:
-#                 customer = Customer.objects.get(id=customer_id)
-#                 cart_items = ShoppingCart.objects.filter(customer=customer)
-#                 total_price = sum(item.price for item in cart_items)
-#                 data = {'cart_items': list(cart_items.values()), 'total_price': total_price}
-#                 return JsonResponse(data)
-#             except Customer.DoesNotExist:
-#                 pass
-        
-#         data = {'cart_items': [], 'total_price': 0}
-#         return JsonResponse(data)
-
+class CreateUserView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class ProductDetail(generics.RetrieveAPIView):
     queryset = Product.objects.all()
@@ -69,7 +47,7 @@ class CartAdd(View):
 
 
 # bypassing csrf token
-cart_add = csrf_exempt(CartAdd.as_view())
+# cart_add = csrf_exempt(CartAdd.as_view())
 # time_tracker_detail = csrf_exempt(TimeTrackerDetail.as_view())
 
 class OrderDetailsView(View):
@@ -80,7 +58,6 @@ class OrderDetailsView(View):
         price_total = sum([item.price for item in cart])
         data = {
             'product_ids': product_ids,
-            'customer_id': customer_id,
             'price_total': price_total,
         }
         return JsonResponse(data)

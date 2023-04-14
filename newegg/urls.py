@@ -1,11 +1,13 @@
 from django.urls import path
 from . import views
+from .views import CreateUserView
 
 
 
 urlpatterns = [
      
-     path('customer/<int:pk>/', views.CustomerList.as_view(), name='customer_list'),
+     path('user/<int:pk>/', views.UserList.as_view(), name='customer_list'),
+     path('api/users/create/', CreateUserView.as_view(), name='create_user'),
      path('product/', views.ProductList.as_view(), name='products'),
      # path('cart/<int:customer_id>/', views.CartDetail.as_view(), name='cart'),
      path('cart/remove/<int:product_id>/', views.CartRemove.as_view(), name='remove_cart'),

@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'newegg',
     'rest_framework',
     'corsheaders',
-    'rest_framework_simplejwt.token_blacklist'
+    # 'rest_framework_simplejwt.token_blacklist'
 ]
 
 MIDDLEWARE = [
@@ -145,9 +145,9 @@ REST_FRAMEWORK = {
       ],
 }
 
-SIMPLE_JWT = {
-     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
-     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-     'ROTATE_REFRESH_TOKENS': True,
-     'BLACKLIST_AFTER_ROTATION': True
-}
+# SIMPLE_JWT = {
+#      'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),
+#      'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+#      'ROTATE_REFRESH_TOKENS': True,
+#      'BLACKLIST_AFTER_ROTATION': True
+# }

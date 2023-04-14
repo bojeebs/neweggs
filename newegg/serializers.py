@@ -1,21 +1,22 @@
 from rest_framework import serializers
-from .models import Customer, Product, ShoppingCart, Category, ProductCategory, OrderDetails
+from .models import Product, ShoppingCart, OrderDetails, User
 
 
 class UserSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField()
-
-
-class CustomerSerializer(serializers.HyperlinkedModelSerializer):
-    customer = serializers.HyperlinkedRelatedField(
-        view_name='customer_detail',
-        read_only=True
-    )
-
     class Meta:
-        model = Customer
-        fields = ('id', 'name', 'address', 'email', 'phone_number','customer')
+        model = User
+        fields = ['name, password']
+  
+    def create(self, validated_data):
+        user = User.objects.create(
+            name=validated_data['name'],
+            email=validated_data['email']
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -29,21 +30,14 @@ class ShoppingCartSerializer(serializers.HyperlinkedModelSerializer):
         queryset=Product.objects.all(),
         source='product'
     )
-    customer_id = serializers.PrimaryKeyRelatedField(
-        queryset=Customer.objects.all(),
-        source='customer'
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source='user'
     )
-
-
+    
     class Meta:
         model = ShoppingCart
         fields = ('id', 'customer', 'customer_id', 'product', 'product_id', 'price')
-
-
-class ProductCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductCategory
-        fields = ['product', 'category']
 
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
@@ -52,8 +46,8 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
         queryset=Product.objects.all(),
         source='product'
     )
-     customer_id = serializers.PrimaryKeyRelatedField(
-        queryset=Customer.objects.all(),
+     user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
         source='customer'
     )
      shopping_cart_id = serializers.PrimaryKeyRelatedField(
@@ -62,4 +56,4 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
      )
      class Meta:
         model = OrderDetails
-        fields = ['product', 'product_id', 'customer', 'customer_id', 'shopping_cart_id', 'order_total']
+        fields = ['product', 'product_id', 'user', 'user_id' 'shopping_cart_id', 'order_total']
