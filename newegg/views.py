@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .serializers import ProductSerializer, CustomerSerializer
-from django.views.generic import View, APIView
+from django.views.generic import View
 from .models import  Product, ShoppingCart, Customer
 from rest_framework import generics
 from django.http import HttpResponse, JsonResponse
@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 
 
