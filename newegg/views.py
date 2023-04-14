@@ -33,8 +33,6 @@ class CreateCustomerView(generics.CreateAPIView):
     serializer_class = CustomerSerializer
 
 
-login_view = csrf_exempt(LoginView.as_view())
-# time_tracker_detail = csrf_exempt(TimeTrackerDetail.as_view())
 
 
 class ProductList(generics.ListCreateAPIView):
