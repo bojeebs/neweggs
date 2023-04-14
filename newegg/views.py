@@ -5,8 +5,9 @@ from .models import  Product, ShoppingCart, User
 from rest_framework import generics
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
+from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
