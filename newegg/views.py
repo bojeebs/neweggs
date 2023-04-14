@@ -7,7 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
-# @csrf_exempt
+@csrf_exempt
 def login_view(request):
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -17,8 +17,7 @@ def login_view(request):
         if customer is not None:
             login(request, customer)
             return HttpResponse('Login successful!')
-        else:
-            return HttpResponse('Login failed.')
+        
         
 
 class CreateCustomerView(generics.CreateAPIView):
