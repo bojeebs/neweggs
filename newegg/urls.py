@@ -7,7 +7,7 @@ from .views import CreateCustomerView
 urlpatterns = [
      
      # path('customer/<int:pk>/', views.UserList.as_view(), name='customer_list'),
-     path('api/customer/create/', CreateCustomerView.as_view(), name='create_user'),
+     path('api/customer/create/', CreateCustomerView.as_view(), name='customer'),
      path('product/', views.ProductList.as_view(), name='products'),
      path('api/customer/login/', views.login_view, name='login'),
      # path('cart/<int:customer_id>/', views.CartDetail.as_view(), name='cart'),
