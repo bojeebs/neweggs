@@ -10,9 +10,9 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
+        name = request.POST.get('name')
         password = request.POST.get('password')
-        customer = authenticate(request, username=username, password=password)
+        customer = authenticate(request, name=name, password=password)
 
         if customer is not None:
             login(request, customer)
