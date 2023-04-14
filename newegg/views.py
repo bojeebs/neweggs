@@ -3,7 +3,7 @@ from .serializers import ProductSerializer, CustomerSerializer
 from django.views.generic import View
 from .models import  Product, ShoppingCart, Customer
 from rest_framework import generics
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 
@@ -13,6 +13,13 @@ def login_view(request):
         name = request.POST.get('name')
         password = request.POST.get('password')
         customer = authenticate(request, name=name, password=password)
+
+        if customer is not None:
+            login(request, customer)
+            return HttpResponse('Login successful!')
+        else:
+            return HttpResponse('Login failed.')
+        
 
 class CreateCustomerView(generics.CreateAPIView):
     queryset = Customer.objects.all()
