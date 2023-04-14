@@ -1,14 +1,13 @@
 from django.urls import path
 from . import views
-from .views import CreateCustomerView
-from newegg.views import LoginView
+
 
 
 urlpatterns = [
      
-     path('api/customer/create/', CreateCustomerView.as_view(), name='customer'),
+     path('api/customer/create/', views.CreateCustomerView.as_view(), name='customer'),
+     path('api/customer/login/', views.LoginView.as_view(), name='login'),
      path('product/', views.ProductList.as_view(), name='products'),
-     path('api/customer/login/', LoginView.as_view(), name='login'),
      # path('cart/<int:customer_id>/', views.CartDetail.as_view(), name='cart'),
      path('cart/remove/<int:product_id>/', views.CartRemove.as_view(), name='remove_cart'),
      path('cart/add/<int:product_id>/', views.CartAdd.as_view(), name='cart_add'),
