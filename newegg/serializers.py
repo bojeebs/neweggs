@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from .models import Product, ShoppingCart, OrderDetails, Customer
+from .models import Product, ShoppingCart, OrderDetails, User
 
 
-class CustomerSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Customer
-        fields = ['name', 'password']
+        model = User
+        fields = ['username', 'password']
   
     def create(self, validated_data):
-        customer = Customer.objects.create(
-            name=validated_data['name'],
+        user = User.objects.create(
+            username=validated_data['username'],
             password=validated_data['password'])
         
-        customer.save()
-        return customer
+        user.save()
+        return user
 
 
 
@@ -29,14 +29,14 @@ class ShoppingCartSerializer(serializers.HyperlinkedModelSerializer):
         queryset=Product.objects.all(),
         source='product'
     )
-    customer_id = serializers.PrimaryKeyRelatedField(
-        queryset=Customer.objects.all(),
-        source='customer'
+    user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source='user'
     )
     
     class Meta:
         model = ShoppingCart
-        fields = ('id', 'customer', 'customer_id', 'product', 'product_id', 'price')
+        fields = ('id', 'user', 'user_id', 'product', 'product_id', 'price')
 
 
 class OrderDetailsSerializer(serializers.ModelSerializer):
@@ -45,9 +45,9 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
         queryset=Product.objects.all(),
         source='product'
     )
-     customer_id = serializers.PrimaryKeyRelatedField(
-        queryset=Customer.objects.all(),
-        source='customer'
+     user_id = serializers.PrimaryKeyRelatedField(
+        queryset=User.objects.all(),
+        source='user'
     )
      shopping_cart_id = serializers.PrimaryKeyRelatedField(
          queryset=ShoppingCart.objects.all(),
@@ -55,4 +55,4 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
      )
      class Meta:
         model = OrderDetails
-        fields = ['product', 'product_id', 'customer', 'customer_id,' 'shopping_cart_id', 'order_total']
+        fields = ['product', 'product_id', 'user', 'user_id', 'shopping_cart_id', 'order_total']

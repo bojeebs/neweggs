@@ -2,19 +2,17 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import CartModal from './CartModal';
 
+
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [show, setShow] = useState(false);
+  const [cart, setCart] = useState([])
 
-  const handleCloseCartModal = () => {
-    setShow(false);
-  };
+ 
 
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await axios.get('https://newegg.onrender.com/product/');
+      const response = await axios.get('http://localhost:8000/product/');
       setProducts(response.data);
       console.log(response.data);
     };
@@ -25,13 +23,19 @@ const Products = () => {
 
   const handleAddToCart = async (productId) => {
     try {
-      await axios.post(`https://newegg.onrender.com/cart/add/${productId}/`);
-      setCart([...cart, productId]);
+      const csrftoken = document.cookie.split('; ').find(row => row.startsWith('csrftoken')).split('=')[1];
+  
+      const response = await axios.post(`http://localhost:8000/cart/add/${productId}/`, {}, {
+        headers: { 'X-CSRFToken': csrftoken }
+      });
+  
+      setCart(cart => [...cart, response.data]);
       console.log(`Product ${productId} added to cart`);
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
-  };
+  }
+  
 
 
 
@@ -44,7 +48,7 @@ const Products = () => {
           <div className="flex-1 max-w-15 overflow-hidden">
             <h3 className="text-lg font-medium break-words">{product.product_name}</h3>
             <h4 className="text-sm">Free Shipping</h4>
-            <button className="bg-orange-500 text-white py-2 px-4 rounded" onClick={() => handleAddToCart(product.id)}>
+            <button className= "bg-orange-500 text-white py-2 px-4 rounded" onClick={() => handleAddToCart(product.id)}>
               Add to Cart
             </button>
           </div>
@@ -53,7 +57,8 @@ const Products = () => {
           </div>
         </div>
       ))}
-      <CartModal show={show} handleCloseCartModal={handleCloseCartModal} cart={cart} />
+       
+        <CartModal cart={cart} setCart={setCart}/>
     </div>
   );
 };

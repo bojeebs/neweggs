@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function Main({ isAuthenticated, toggleAuthenticated }) {
+function Main({ }) {
   
   const [message, setMessage] = useState("")
 
@@ -33,7 +33,7 @@ function Main({ isAuthenticated, toggleAuthenticated }) {
 
   useEffect(() => {
     const getProducts = async () => {
-      const response = await axios.get('https://newegg.onrender.com/product/');
+      const response = await axios.get('http://localhost:8000/product/');
       setProducts(response.data);
       console.log(response.data)
     };

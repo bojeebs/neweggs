@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-ze_g3-ow#tivwe+8pvof#v2m@=c(uue)2(w#yscom1z@)1icl-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -25,8 +25,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
-    "https://newegg.onrender.com/api/customer/login/",
-    "https://newegg.onrender.com/api/customer/create/",
+    "http://localhost:8000"
 
 ]
 CORS_ALLOW_ALL_ORIGINS = False
@@ -44,7 +43,7 @@ INSTALLED_APPS = [
     'newegg',
     'rest_framework',
     'corsheaders',
-    # 'rest_framework_simplejwt.token_blacklist'
+    
 ]
 
 MIDDLEWARE = [
@@ -52,7 +51,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -83,18 +82,16 @@ WSGI_APPLICATION = 'neweggs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'newegg',
-#         'USER': 'tunruser',
-#         'PASSWORD': 'bojeebs',
-#         'HOST': 'localhost'
-#     }
-# }
 DATABASES = {
-    "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'newegg',
+        'USER': 'newegg',
+        'PASSWORD': '1234',
+        'HOST': 'localhost'
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -142,11 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-REST_FRAMEWORK = {
-     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-      ],
-}
+
+
 
 # SIMPLE_JWT = {
 #      'ACCESS_TOKEN_LIFETIME': timedelta(minutes=20),

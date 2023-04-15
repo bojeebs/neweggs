@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .serializers import ProductSerializer, CustomerSerializer
+from .serializers import ProductSerializer, UserSerializer
 from django.views.generic import View
-from .models import  Product, ShoppingCart, Customer
+from .models import  Product, ShoppingCart, User
 from rest_framework import generics
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
@@ -13,24 +13,24 @@ from rest_framework.views import APIView
 
 
 class LoginView(APIView):
-    authentication_classes = []
-    permission_classes = []
+    # authentication_classes = []
+    # permission_classes = []
 
     def post(self, request, format=None):
-        name = request.data.get('name')
+        username = request.data.get('username')
         password = request.POST.get('password')
-        customer = get_object_or_404(Customer, name=name)
+        customer = get_object_or_404(User, username=username)
 
-        if customer.password == password:
+        if User.password == password:
             request.session['customer_id'] = customer.id
             return Response({'status': 'success'})
         else:
             return Response({'status': 'failure'})
         
 
-class CreateCustomerView(generics.CreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = CustomerSerializer
+class CreateUserView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 
 
@@ -68,9 +68,9 @@ class CartAdd(View):
 # time_tracker_detail = csrf_exempt(TimeTrackerDetail.as_view())
 
 class OrderDetailsView(View):
-    def get(self, request, customer_id):
+    def get(self, request, user_id):
         
-        cart = ShoppingCart.objects.filter(customer_id=customer_id)
+        cart = ShoppingCart.objects.filter(user_id=user_id)
         product_ids = [item.product.id for item in cart]
         price_total = sum([item.price for item in cart])
         data = {

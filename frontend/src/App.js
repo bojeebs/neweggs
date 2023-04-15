@@ -3,39 +3,32 @@ import { Routes, Route} from 'react-router-dom'
 import { useState } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import Logging from './components/Logging';
-import Loggedout from './components/Loggedout';
-import CreateAccount from './components/CreateAccount';
+
 import Cart from './components/Cart'
 import Products from './components/Products'
-import CartModal from './components/CartModal';
+
 
 
 
 function App() {
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
   
 
 
-  const toggleAuthenticated = () => {
-    setIsAuthenticated(!isAuthenticated);
-  }
+
 
   return (
     <div className="App">
-      <Header
-      isAuthenticated={isAuthenticated}
-      toggleAuthenticated={toggleAuthenticated}
-      />
+      <Header/>
       
        <Routes>
-          <Route path="/home" element={<Main isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/login" element={<Logging isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/logout" element={<Loggedout isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/" element={<CreateAccount isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/cart" element={<Cart isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
-          <Route path="/products" element={<Products isAuthenticated={isAuthenticated} toggleAuthenticated={toggleAuthenticated}/>}/>
+          <Route path="/" element={<Main/>}/> 
+          {/* <Route path="/login" element={<Logging />}/> */}
+          {/* <Route path="/logout" element={<Loggedout/>}/> */}
+          {/* <Route path="/" element={<CreateAccount />}/> */}
+          <Route path="/cart" element={<Cart />}/>
+          <Route path="/products" element={<Products/>}/>
           
         </Routes>
         
