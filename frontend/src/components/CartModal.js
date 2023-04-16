@@ -24,6 +24,32 @@ const CartModal = ({ cart = [], setCart }) => {
     }
   };
 
+  const handleIncrement = async (id) => {
+    console.log('handleIncrement called with id:', id);
+    try {
+      const existingItem = cart.find(item => item.id === id);
+      console.log('existingItem:', existingItem);
+      if (existingItem) {
+        setCart(cart.map(item => item.id === id ? { ...item, quantity: item.quantity + 1 } : item));
+  
+        console.log('Sending PUT request with data:', {
+          user_id: existingItem.user_id,
+          product: existingItem.product,
+          product_id: existingItem.product_id,
+          quantity: existingItem.quantity + 1
+        });
+        await axios.put(`http://localhost:8000/api/cart/update/${id}/`, {
+          user_id: 1,
+          product: existingItem.product,
+          product_id: existingItem.product_id,
+          quantity: existingItem.quantity + 1
+        });
+      }
+    } catch (error) {
+      console.error('Error incrementing cart item:', error);
+    }
+  };
+
   return (
     <>
       <div className="absolute top-0 right-0 mt-5 mr-5">
@@ -37,14 +63,15 @@ const CartModal = ({ cart = [], setCart }) => {
           <Offcanvas.Title>Cart</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        {cart.map((item) => (
-          <div key={item.id}>
-            <h5 className="text-sm">{item.product_name}</h5>
-            <p>{item.product_description}</p>
-            <Button variant="danger" onClick={() => handleDelete(item.id)}>Remove</Button>
-          </div>
-        ))}
-         
+          {cart.map((item) => (
+            <div key={item.id}>
+              <h5 className="text-sm">{item.product_name}</h5>
+              <p>{item.product_description}</p>
+              <p>Quantity: {item.quantity}</p>
+              <Button variant="success" onClick={() => handleIncrement(item.id)}>+</Button>
+              <Button variant="danger" onClick={() => handleDelete(item.id)}>Remove</Button>
+            </div>
+          ))}
         </Offcanvas.Body>
       </Offcanvas>
     </>
@@ -52,3 +79,4 @@ const CartModal = ({ cart = [], setCart }) => {
 };
 
 export default CartModal;
+

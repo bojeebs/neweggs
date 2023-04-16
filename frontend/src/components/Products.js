@@ -29,7 +29,7 @@ const Products = () => {
         headers: { 'X-CSRFToken': csrftoken }
       });
   
-      setCart(cart => [...cart, response.data]);
+      setCart(cart => [...cart, { ...response.data, quantity: 1 }]);
       console.log(`Product ${productId} added to cart`);
     } catch (error) {
       console.error('Error adding to cart:', error);
