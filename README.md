@@ -21,7 +21,15 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 - DBeaver for database managment
 - Render for backend deployment and Netlify 
 
-## Installitons
+## Installations 
+- npx create-react-app tickit 
+- npm i for node_modules
+- npm install axios
+- npm install react-router-dom
+- npm install react-bootstrap bootstrap for modal
+- npm i react-router-dom
+
+
 
 ## Key Features
 1. View several different categories of products
@@ -47,8 +55,8 @@ This is Neweggs a completely separate and not at all similar to the popular elec
 ## Component Hierarchy
 - ![Screenshot of Components](Assets/Component.png)
 
-## Low Fidelity Wireframes
+## Link to Figma Wireframe
 - [Low Fidelity Wireframes](https://www.figma.com/file/FRpNeMbISdKnStmuQzawXY/Newegg-Wireframe?node-id=0%3A1&t=zrC21aDDZEOdVNUL-1)
 
-## Links
+## Trello Board
 - [Project Trello Board](https://trello.com/b/pu1dS7Wk/neweggs)
